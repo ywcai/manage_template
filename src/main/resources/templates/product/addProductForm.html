@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>表单插件</title>
+<link href="lib/ligerUI/skins/Aqua/css/ligerui-all.css"
+	rel="stylesheet" type="text/css" />
+<script src="lib/jquery/jquery-1.9.0.min.js"
+	type="text/javascript"></script>
+<script src="lib/json2.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/core/base.js" type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerForm.js"
+	type="text/javascript"></script>
+<script src="lib/json2.js"></script>
+<script src="lib/ligerUI/js/plugins/ligerButton.js"
+	type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerTextBox.js"
+	type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerTip.js"
+	type="text/javascript"></script>
+<script src="lib/jquery-validation/jquery.validate.min.js"
+	type="text/javascript"></script>
+<script src="lib/jquery-validation/jquery.metadata.js"
+	type="text/javascript"></script>
+<script src="lib/jquery-validation/messages_cn.js"
+	type="text/javascript"></script>
+<script src="lib/ligerUI/js/plugins/ligerComboBox.js"
+	type="text/javascript"></script>
+	<script src="lib/lsjs/ctr/provinceList.js"
+	type="text/javascript"></script>
+<script type="text/javascript">
+
+	$(function() {
+	//	var provinceListprovinceList = [ "北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江",
+		    // 		         			"上海", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东",
+		     		        // 			"广西", "海南", "重庆", "四川", "贵州", "云南", "西藏", "陕西", "甘肃", "青海", "宁夏",
+		     		         //			"新疆", "台湾", "香港", "澳门" ];
+		$("#province option").remove();
+		$.each(provinceList, function(index, str) 
+		{
+			$("#province").append("<option>"+str+"</option>");
+		}
+		);
+		$.metadata.setType("attr", "validate");
+		$("#form1").ligerForm();
+		$("#form1").validate({
+			errorPlacement : function(lable, element) {
+				lable.ligerHideTip();
+				lable.remove();
+				element.ligerTip({
+					content : lable.html(),
+					appendIdTo : lable
+				});
+			},
+			success : function(lable) {
+				lable.ligerHideTip();
+				lable.remove();
+			}
+		});
+	});
+</script>
+<style type="text/css">
+body {
+	font-size: 12px;
+}
+
+.l-table {
+	width: 90%;
+}
+
+.l-table-title {
+	width: 10%;
+	padding: 4px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.l-table-content {
+	width: 50%;
+	padding: 4px;
+	height: 30px;
+	line-height: 30px;
+}
+</style>
+
+</head>
+
+<body style="padding: 5px">
+
+	<form name="form1" id="form1">
+		<table cellpadding="0" cellspacing="0" class="l-table">
+			<tr>
+				<td align="right" class="l-table-title">产品名称</td>
+				<td align="left" class="l-table-content"><input name="des"
+					id="des" ltype="text" validate="required:true,rangelength:[3,10]"
+					value="20M" /></td>
+			</tr>
+			<tr>
+				<td align="right" class="l-table-title">充值编码</td>
+				<td align="left" class="l-table-content"><input name="packcode"
+					id="packcode" ligerui="{type:'int'}" ltype="text" value='20'
+					validate="required:true,digits:true,range:[20,25000]" /></td>
+			</tr>
+			<tr>
+				<td align="right" class="l-table-title">运营商</td>
+				<td align="left" class="l-table-content"><select ltype="text"
+					name="operator" id="operator">
+						<option value="联通">联通</option>
+						<option value="电信">电信</option>
+						<option value="移动">移动</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td align="right" class="l-table-title">省份</td>
+				<td align="left" class="l-table-content"><select ltype="text"
+					name="province" id="province">
+						<option value="四川">四川</option>
+						<option value="其他">其他</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td align="right" class="l-table-title">使用范围</td>
+				<td align="left" class="l-table-content"><select name="local"
+					id="local">
+						<option value='1'>本地套餐</option>
+						<option value='0'>全国套餐</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td align="right" class="l-table-title">原价(分)</td>
+				<td align="left" class="l-table-content"><input name="price"
+					id="price" ligerui="{type:'int'}" ltype="text"
+					validate="required:true,digits:true,range:[100,50000]" value='500' /></td>
+			</tr>
+			<tr>
+				<td align="right" class="l-table-title">折扣(%)</td>
+				<td align="left" class="l-table-content"><input name="rate"
+					id="rate" ligerui="{type:'int'}" ltype="text"
+					validate="required:true,digits:true,range:[30,100]" value='85' /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

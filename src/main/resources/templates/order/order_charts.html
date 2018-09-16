@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>订单分析</title>
+<script src="../../lib/chart/Chart.js"></script>
+<script src="../../lib/jquery/jquery-1.9.0.min.js"></script>
+<script src="../../lib/json2.js"></script>
+<script src="../../lib/lsjs/ls_chart_base.js"></script>
+<script type="text/javascript">
+
+	//chart的样式配置初始文件
+	var baseconfig = [
+	{
+		type : 'pie',
+
+		options : {
+			responsive : true,
+			legend : {
+				display : true,
+				position : "bottom",
+				reverse : true,
+				labels : {
+					usePointStyle : true
+				}
+			},
+			title : {
+				display : true,
+				text : '订单完成情况分布'
+			}
+		}
+	},
+
+	{
+		type : 'bar',
+
+		options : {
+			responsive : true,
+			legend : {
+				display : true,
+				position : "bottom",
+				reverse : true,
+				labels : {
+					usePointStyle : true
+				}
+			},
+			title : {
+				display : true,
+				text : '产品收入分布'
+			}
+		}
+	} ]
+	//请求数据类型及分析的字段
+	var reqData = ["orderStatus","productId"];
+	//定义各数据集依次使用的颜色
+	var defaultCorlor = ["green", "orange", "hotpink","#E0E4CC", "#F38630", "#69D2E7","lightcoral"];
+	//请求数据的地址
+	var reqUrl = [ "../../restful/analysis/order",
+			"../../restful/analysis/order", "../../restful/analysis/order",
+			"../../restful/analysis/order" ];
+	$(f_init);
+</script>
+</head>
+<body style="text-align: center">
+	<div style="margin: 0px auto; width: 1000px; padding-bottom: 50px">
+		<ul style="list-style-type: none; padding: 0px; margin: 0px;">
+			<li
+				style="width: 450px; list-style-type: none; float: left; margin-top: 100px">
+				<canvas style="border: 1px solid red"></canvas>
+			</li>
+			<li
+				style="width: 450px; list-style-type: none; float: right; margin-top: 100px">
+				<canvas style="border: 1px solid red"></canvas>
+			</li>
+			<li style="clear: both; list-style-type: none"></li>
+		</ul>
+	</div>
+</body>
+</html>
